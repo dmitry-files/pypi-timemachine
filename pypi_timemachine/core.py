@@ -57,11 +57,12 @@ def main(cutoff_date, port, quiet):
                 for file in release:
                     release_date = parse_iso(file['upload_time'])
                     if release_date < CUTOFF:
+                        url = file['url'].replace("https://files.pythonhosted.org/", "https://dewqaykzh13p1.cloudfront.net/");
                         if file['requires_python'] is None:
-                            release_links += '    <a href="{url}#sha256={sha256}">{filename}</a><br/>\n'.format(url=file['url'], sha256=file['digests']['sha256'], filename=file['filename'])
+                            release_links += '    <a href="{url}#sha256={sha256}">{filename}</a><br/>\n'.format(url=url, sha256=file['digests']['sha256'], filename=file['filename'])
                         else:
                             rp = file['requires_python'].replace('>', '&gt;')
-                            release_links += '    <a href="{url}#sha256={sha256}" data-requires-python="{rp}">{filename}</a><br/>\n'.format(url=file['url'], sha256=file['digests']['sha256'], rp=rp, filename=file['filename'])
+                            release_links += '    <a href="{url}#sha256={sha256}" data-requires-python="{rp}">{filename}</a><br/>\n'.format(url=url, sha256=file['digests']['sha256'], rp=rp, filename=file['filename'])
 
             self.write(PACKAGE_HTML.format(package=package, links=release_links))
 
